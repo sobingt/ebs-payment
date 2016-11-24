@@ -1,0 +1,152 @@
+form(action='https://secure.ebs.in/pg/ma/payment/request', id='payment', name='payment', method='POST')
+  table
+    input(value=account_id, name='account_id')
+    tbody
+      tr
+        td account_id
+        td #{account_id}
+      input(value=address, name='address')
+      tr
+        td address
+        td #{address}
+      input(value=amount, name='amount')
+      tr
+        td amount
+        td #{amount}
+      input(value=bank_code, name='bank_code')
+      tr
+        td bank_code
+        td
+      input(value=card_brand, name='card_brand')
+      tr
+        td card_brand
+        td #{card_brand}
+      input(value=name_on_card, name='name_on_card')
+      tr
+        td name_on_card
+        td #{name_on_card}
+      input(value=card_number, name='card_number')
+      tr
+        td card_number
+        td #{card_number}
+      input(value=card_cvv, name='card_cvv')
+      tr
+        td card_cvv
+        td #{card_cvv}
+      input(value=card_expiry, name='card_expiry')
+      tr
+        td card_expiry
+        td #{card_expiry}
+      input(value=channel, name='channel')
+      tr
+        td channel
+        td #{channel}
+      input(value=city, name='city')
+      tr
+        td city
+        td #{city}
+      input(value=country, name='country')
+      tr
+        td country
+        td #{country}
+      input(value=currency, name='currency')
+      tr
+        td currency
+        td #{currency}
+      input(value=description, name='description')
+      tr
+        td description
+        td #{description}
+      input(value=display_currency, name='display_currency')
+      tr
+        td display_currency
+        td #{display_currency}
+      input(value=display_currency_rates, name='display_currency_rates')
+      tr
+        td display_currency_rates
+        td #{display_currency_rates}
+      input(value=email, name='email')
+      tr
+        td email
+        td #{email}
+      input(value=emi, name='emi')
+      tr
+        td emi
+        td #{emi}
+        td
+      input(value=mode, name='mode')
+      tr
+        td mode
+        td #{mode}
+      input(value=name, name='name')
+      tr
+        td name
+        td #{name}
+      input(value=page_id, name='page_id')
+      tr
+        td page_id
+        td #{page_id}
+        td
+      input(value=payment_mode, name='payment_mode')
+      tr
+        td payment_mode
+        td #{payment_mode}
+      input(value=payment_option, name='payment_option')
+      tr
+        td payment_option
+        td
+      input(value=phone, name='phone')
+      tr
+        td phone
+        td #{phone}
+      input(value=postal_code, name='postal_code')
+      tr
+        td postal_code
+        td #{postal_code}
+      input(value=reference_no, name='reference_no')
+      tr
+        td reference_no
+        td #{reference_no}
+      input(value=return_url, name='return_url')
+      tr
+        td return_url
+        td #{return_url}
+      input(value=ship_address, name='ship_address')
+      tr
+        td ship_address
+        td #{ship_address}
+      input(value=ship_city, name='ship_city')
+      tr
+        td ship_city
+        td #{ship_city}
+      input(value=ship_country, name='ship_country')
+      tr
+        td ship_country
+        td #{ship_country}
+      input(value=ship_name, name='ship_name')
+      tr
+        td ship_name
+        td #{ship_name}
+      input(value=ship_phone, name='ship_phone')
+      tr
+        td ship_phone
+        td #{ship_phone}
+      input(value=ship_postal_code, name='ship_postal_code')
+      tr
+        td ship_postal_code
+        td #{ship_postal_code}
+      input(value=ship_state, name='ship_state')
+      tr
+        td ship_state
+        td #{ship_state}
+      input(value=state, name='state')
+      tr
+        td state
+        td #{state}
+      input(value=secure_hash, name='secure_hash')
+      tr
+        td secure_hash
+        td #{secure_hash}
+  button(onclick='document.payment.submit();')  SUBMIT 
+  script.
+    document.payment.submit();

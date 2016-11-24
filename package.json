@@ -8,13 +8,15 @@
     "example": "examples",
     "test": "test"
   },
-  "scripts": {
-    "test": "npm text"
-  },
   "keywords": [
     "payment",
     "ebs"
   ],
   "author": "Sobin George Thomas <sobingt@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pug": "^2.0.0-beta6"
+  }, 
+  "readmeFilename": "README.md",
+  "man": "README.md"
 }
