@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-var ebs = require("ebs");
+var ebs = require("ebsjs");
 ```
 
 ## Table of Contents
