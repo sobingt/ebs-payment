@@ -1,5 +1,5 @@
 {
-  "name": "ebs",
+  "name": "ebsjs",
   "version": "0.1.0",
   "description": "EBS payment module",
   "main": "lib/index.js",
@@ -15,8 +15,10 @@
   "author": "Sobin George Thomas <sobingt@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "crypto": "0.0.3",
+    "path": "^0.12.7",
     "pug": "^2.0.0-beta6"
-  }, 
+  },
   "readmeFilename": "README.md",
   "man": "README.md"
 }
