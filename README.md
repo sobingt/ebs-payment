@@ -17,11 +17,11 @@ var ebs = require("ebsjs");
 - [7 Initiate payment](#7-initiate-payment)
   - [7.1 Initiate payment with all options](#71-initiate-payment-with-all-options)
   - [7.2 Initiate payment with a saved card](#72-initiate-payment-with-a-saved-card)
-    - [7.2.1 Create a payment instructment object](#7.2.1-create-a-payment-instructment-object)
+    - [7.2.1 Create a payment instructment object](#721-create-a-payment-instructment-object)
     - [7.2.2 Initiate payment with signed transaction with saved card](#7.2.2-initiate-payment-with-signed-transaction-with-saved-card)
-  - [7.3 Initiate payment with a perfered netbanking](#7.3-initiate-payment-with-a-perfered-netbanking)
-    - [7.3.1 Create a payment instructment object](#7.3.1-create-a-payment-instructment-object)
-    - [7.3.2 Initiate payment with signed transaction with saved card](#7.3.2-initiate-payment-with-signed-transaction-with-saved-card)
+  - [7.3 Initiate payment with a perfered netbanking](#73-initiate-payment-with-a-perfered-netbanking)
+    - [7.3.1 Create a payment instructment object](#731-create-a-payment-instructment-object)
+    - [7.3.2 Initiate payment with signed transaction with saved card](#732-initiate-payment-with-signed-transaction-with-saved-card)
 
 ### 1. Create EBS merchant object
 
