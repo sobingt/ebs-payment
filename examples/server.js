@@ -16,6 +16,7 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   // Initialize merchant
+  //console.log(req.body);
   var merchant = new ebs.Merchant({
     key : process.env.EBS_KEY,
     account_id : req.body.account_id,
@@ -59,15 +60,34 @@ app.post('/', function(req, res){
     display_currency_rates: req.body.display_currency_rates,
     return_url : req.body.return_url
   });
+  if(req.body.payment_mode!="")
+  {
+    if(req.body.payment_mode == ebs.CONFIG.PAYMENT_MODE.CREDIT_CARD ||
+       req.body.payment_mode == ebs.CONFIG.PAYMENT_MODE.DEBIT_CARD)
+      var paymentMethod = new ebs.Instrument({
+        payment_mode : req.body.payment_mode,
+        card_brand : req.body.card_brand,
+        name_on_card : req.body.name_on_card,
+        card_number : req.body.card_number,
+        card_cvv : req.body.card_cvv,
+        card_expiry : req.body.card_expiry
+      });
+    else
+      var paymentMethod = new ebs.Instrument({
+        payment_mode : req.body.payment_mode
+      });
 
-  // Merchant signing on transaction
-  const signedTxn = merchant.signTransaction(user, transaction)
-    // Initiate Payment
+    var signedTxn = merchant.signTransaction(user, transaction, paymentMethod)
+    }
+  else {
+    // Merchant signing on transaction
+    var signedTxn = merchant.signTransaction(user, transaction)
+    }
+
+  // Initiate Payment
   merchant.initiatePayment(signedTxn, function(error, body){
     res.send(body);
   })
-
-  
 
 });
 
