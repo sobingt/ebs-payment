@@ -1,0 +1,211 @@
+extends layout
+
+block title
+  title EBS Payment Form
+
+block scripts
+  style.
+    table {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    }
+    th 		 { font-size:12px;background:#015289;color:#FFFFFF;font-weight:bold;height:30px;}
+    td 		 { font-size:12px;background:#DDE8F3}
+    .error {color:#FF0000; font-weight:bold;}
+  link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', type='text/css', media='all')
+  script(src="http://code.jquery.com/jquery-1.10.0.min.js")
+
+block content
+  form#frmTransaction(method='post', action='/', name='frmTransaction')
+    h3 Action URL : https://secure.ebs.in/pg/ma/payment/request
+    table(width='100%', cellpadding='2', cellspacing='2', border='0')
+      tr
+        th(colspan='2') Transaction Details
+      tr
+        td.fieldName
+          span.error *
+          |  Channel
+        td(align='left')
+          select(name='channel')
+            option(value='0') Standard
+      tr
+        td.fieldName(width='50%')
+          span.error *
+          |  Account Id
+        td(align='left', width='50%')
+          input(name='account_id', type='text', value='5087')
+      tr
+        td.fieldName(width='50%')
+          span.error *
+          |  Reference No
+        td(align='left', width='50%')
+          input(name='reference_no', type='text', value='223')
+      tr
+        td.fieldName(width='50%')
+          span.error *
+          |  Sale Amount
+        td(align='left', width='50%')
+          input(name='amount', type='text', value='1.00')
+      tr
+        td.fieldName
+          span.error *
+          | Currency
+        td(align='left')
+          select(name='currency')
+            option(value='INR') INR
+            option(value='USD') USD
+      tr
+        td.fieldName Additional Currency
+        td(align='left')
+          select(name='display_currency')
+            option(value='INR') INR
+            option(value='USD', selected='') USD
+            option(value='EUR', selected='') EURO
+            option(value='GBP', selected='') GBP
+      tr
+        td.fieldName(width='50%') Additional Currency Rate
+        td(align='left', width='50%')
+          input(name='display_currency_rates', type='text', value='1')
+      tr
+        td.fieldName(width='50%')
+          span.error *
+          |  Description
+        td(align='left', width='50%')
+          input(name='description', type='text', value='Test Order Description')
+      tr
+        td.fieldName
+          span.error *
+          |  Return Url
+        td(align='left')
+          input(name='return_url', type='text', size='60', value='http://localhost/ebs/response.php')
+      tr
+        td.fieldName
+          span.error *
+          |  Mode
+        td(align='left')
+          select(name='mode')
+            option(value='TEST') TEST
+            option(value='LIVE', selected='') LIVE
+      tr
+        td.fieldName Payment Mode
+        td(align='left')
+          select(name='payment_mode')
+            option(value='') All
+            option(value='1') Credit Card
+            option(value='2') Debit Card
+            option(value='3') Net Banking
+            option(value='4') Cash Card
+            option(value='5') Credit Card - EMI
+            option(value='6') Credit Card - Reward Point
+            option(value='7') Paypal
+      tr
+        td.fieldName Card Brand
+        td(align='left')
+          select(name='card_brand')
+            option(value='') All
+            option(value='1') VISA
+            option(value='2') MasterCard
+            option(value='3') Maestro
+            option(value='4') Diners Club
+            option(value='5') American Express
+            option(value='6') JCB
+      tr
+        td.fieldName Payment Option
+        td(align='left')
+          input(name='payment_option', type='text', value='')
+      tr
+        td.fieldName Bank Code
+        td(align='left')
+          input(name='bank_code', type='text', value='')
+      tr
+        td.fieldName EMI
+        td(align='left')
+          input(name='emi', type='text', value='')
+      tr
+        td.fieldName Page ID
+        td(align='left')
+          input(name='page_id', type='text', value='')
+      tr
+        th(colspan='2') Billing Address
+      tr
+        td.fieldName
+          span.error *
+          |  Name
+        td(align='left')
+          input(name='name', type='text', value='Billing Name')
+      tr
+        td.fieldName
+          span.error *
+          | Address
+        td(align='left')
+          textarea(name='address') Billing Address
+      tr
+        td.fieldName
+          span.error *
+          | City
+        td(align='left')
+          input(name='city', type='text', value='Billing City')
+      tr
+        td.fieldName State/Province
+        td(align='left')
+          input(name='state', type='text', value='Billing State')
+      tr
+        td.fieldName
+          span.error *
+          | ZIP/Postal Code
+        td(align='left')
+          input(name='postal_code', type='text', value='600001')
+      tr
+        td.fieldName
+          span.error *
+          | Country
+        td(align='left')
+          input(name='country', type='text', value='IND')
+      tr
+        td.fieldName
+          span.error *
+          | Email
+        td(align='left')
+          input(name='email', type='text', value='name@yourdomain.in')
+      tr
+        td.fieldName Telephone
+        td(align='left')
+          input(name='phone', type='text', value='04423452345')
+      tr
+        th(colspan='2') Delivery Address
+      tr
+        td.fieldName  Name
+        td(align='left')
+          input(name='ship_name', type='text', value='Shipping Name')
+      tr
+        td.fieldName Address
+        td(align='left')
+          input(name='ship_address', type='text', value='Shipping Address')
+      tr
+        td.fieldName City
+        td(align='left')
+          input(name='ship_city', type='text', value='Shipping City')
+      tr
+        td.fieldName State/Province
+        td(align='left')
+          input(name='ship_state', type='text', value='Shipping State')
+      tr
+        td.fieldName ZIP/Postal Code
+        td(align='left')
+          input(name='ship_postal_code', type='text', value='600000')
+      tr
+        td.fieldName Country
+        td(align='left')
+          input(name='ship_country', type='text', value='IND')
+      tr
+        td.fieldName Telephone
+        td(align='left')
+          input(name='ship_phone', type='text', value='04423452345')
+      tr
+        td(valign='top', align='center', colspan='2')
+          input(name='submitted', value='Submit', type='submit')
+          input(value='Reset', type='reset')
+      tr
+        td(valign='top', align='center', colspan='2')
+          span.error *
+          span denotes required field
