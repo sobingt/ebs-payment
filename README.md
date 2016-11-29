@@ -22,6 +22,7 @@ var ebs = require("ebsjs");
   - [7.3 Initiate payment with a perfered netbanking](#73-initiate-payment-with-a-perfered-netbanking)
     - [7.3.1 Create a payment instructment object](#731-create-a-payment-instructment-object)
     - [7.3.2 Initiate payment with signed transaction with saved card](#732-initiate-payment-with-signed-transaction-with-saved-card)
+- [8. Using example](#8-using-example)
 
 ### 1. Create EBS merchant object
 
@@ -170,5 +171,17 @@ app.get('/pay', function(req, res){
   ...
   ...
 });
+
+```
+
+### 8. Using example
+
+```sh
+cd examples
+npm install
+export EBS_KEY=<EBS_MERCHANT_KEY> EBS_ACCOUNT_ID=<EBS_MERCHANT_ACCOUNT_ID>
+npm start
+
+go to localhost:8000
 
 ```
