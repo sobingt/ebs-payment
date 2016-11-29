@@ -54,7 +54,7 @@ app.post('/', function(req, res){
     return_url : req.body.return_url
   });
 
-  const signedTxn2 = merchant.signTransaction(user2, transaction2)
+  const signedTxn2 = merchant2.signTransaction(user2, transaction2)
   merchant2.initiatePayment(signedTxn2, function(error, body){
     res.send(body);
   })
