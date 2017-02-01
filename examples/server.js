@@ -35,8 +35,8 @@ app.post('/', function(req, res){
   }
   // Initialize merchant
   merchant = new ebs.Merchant({
-    key : process.env.EBS_KEY,
-    account_id : req.body.account_id,
+    key : process.env.EBS_KEY || req.body.key || 'EBS Key',
+    account_id : process.env.EBS_ACCOUNT_ID || req.body.account_id || 'Account Id',
     mode : req.body.mode,
     algo : req.body.algo,
     page_id : req.body.page_id,
@@ -125,7 +125,7 @@ app.post('/', function(req, res){
 //Get response
 app.get('/response', function(req, res){
   var response = req.query;
-  response.status = merchant.verifySignature(response);
+  response.isTxnValid = merchant.verifySignature(response);
   delete response.merge;
   res.render('response',{ data : response});
 });
@@ -142,3 +142,42 @@ if(!module.parent){
     console.log('Server running at 8000');
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

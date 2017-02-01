@@ -21,7 +21,7 @@ block content
       th(width='90%')  
   center
     h3 Response
-    if(!data['status'])
+    if(!data['isTxnValid'])
       h5 Hash validation failed!
     table(width='600', cellpadding='2', cellspacing='2', border='0')
       tr
