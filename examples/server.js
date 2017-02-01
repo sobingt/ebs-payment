@@ -1,7 +1,7 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
       app = module.exports = express(),
-      ebs = require('ebsjs');
+      ebs = require('../lib/');
 
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
@@ -9,18 +9,38 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/public'));
+// Initialize merchant 
+var merchant = new ebs.Merchant({
+    key : process.env.EBS_KEY,
+    account_id : process.env.EBS_ACCOUNT_ID
+  });
 
 app.get('/', function(req, res){
   res.render('home');
 });
 
 app.post('/', function(req, res){
+  if(req.body.ba_bankaccountcode != '' && req.body.split_amount != '')
+  {
+    var amt =0;
+    for(i in req.body.split_amount)
+    {
+      amt+=parseInt(req.body.split_amount[i]);
+    }
+    if(amt<parseInt(req.body.amount))
+    {
+       return res.render('home', {message:'Invalid split amount. The total of all spilt amounts to be equal to or greater than amount'});
+      ;
+    }
+  }
   // Initialize merchant
-  //console.log(req.body);
-  var merchant = new ebs.Merchant({
+  merchant = new ebs.Merchant({
     key : process.env.EBS_KEY,
     account_id : req.body.account_id,
-    mode : req.body.mode
+    mode : req.body.mode,
+    algo : req.body.algo,
+    page_id : req.body.page_id,
+    channel : req.body.channel
   });
   // Create user
   var user = new ebs.User({
@@ -58,8 +78,14 @@ app.post('/', function(req, res){
     currency: req.body.currency,
     display_currency: req.body.display_currency,
     display_currency_rates: req.body.display_currency_rates,
-    return_url : req.body.return_url
+    return_url : req.body.return_url,
+    split_profile_code : req.body.split_profile_code,
+    payby_date : req.body.payby_date,
+    payby_time : req.body.payby_time,
+    ba_bankaccountcode : req.body.ba_bankaccountcode,
+    split_amount : req.body.split_amount
   });
+
   if(req.body.payment_mode!="")
   {
     if(req.body.payment_mode == ebs.CONFIG.PAYMENT_MODE.CREDIT_CARD ||
@@ -72,11 +98,16 @@ app.post('/', function(req, res){
         card_cvv : req.body.card_cvv,
         card_expiry : req.body.card_expiry
       });
-    else
+    else if(req.body.payment_mode == ebs.CONFIG.PAYMENT_MODE.NET_BANKING)
+      var paymentMethod = new ebs.Instrument({
+        payment_mode : req.body.payment_mode,
+        payment_option : req.body.payment_option
+      });
+    else 
       var paymentMethod = new ebs.Instrument({
         payment_mode : req.body.payment_mode
       });
-
+    
     var signedTxn = merchant.signTransaction(user, transaction, paymentMethod)
     }
   else {
@@ -91,6 +122,21 @@ app.post('/', function(req, res){
 
 });
 
+//Get response
+app.get('/response', function(req, res){
+  var response = req.query;
+  response.status = merchant.verifySignature(response);
+  delete response.merge;
+  res.render('response',{ data : response});
+});
+
+//POST response
+app.post('/response', function(req, res){
+  var response = req.body;
+  response.status = merchant.verifySignature(response);
+  delete response.merge;
+  res.render('response',{ data : response});
+});
 if(!module.parent){
   app.listen(process.env.PORT || 8000, function(){
     console.log('Server running at 8000');

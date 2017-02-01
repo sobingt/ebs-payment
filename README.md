@@ -16,12 +16,12 @@ var ebs = require("ebsjs");
 - [6. Get transaction signed by merchant](#6-get-transaction-signed-by-merchant)
 - [7 Initiate payment](#7-initiate-payment)
   - [7.1 Initiate payment with all options](#71-initiate-payment-with-all-options)
-  - [7.2 Initiate payment with a saved card](#72-initiate-payment-with-a-saved-card)
+  - [7.2 Initiate payment with a stored card](#72-initiate-payment-with-a-stored-card)
     - [7.2.1 Create a payment instructment object](#721-create-a-payment-instructment-object)
-    - [7.2.2 Initiate payment with signed transaction with saved card](#7.2.2-initiate-payment-with-signed-transaction-with-saved-card)
+    - [7.2.2 Initiate payment with signed transaction with stored card](#7.2.2-initiate-payment-with-signed-transaction-with-stored-card)
   - [7.3 Initiate payment with a perfered netbanking](#73-initiate-payment-with-a-perfered-netbanking)
     - [7.3.1 Create a payment instructment object](#731-create-a-payment-instructment-object)
-    - [7.3.2 Initiate payment with signed transaction with saved card](#732-initiate-payment-with-signed-transaction-with-saved-card)
+    - [7.3.2 Initiate payment with signed transaction with stored card](#732-initiate-payment-with-signed-transaction-with-stored-card)
 - [8. Using example](#8-using-example)
 
 ### 1. Create EBS merchant object
@@ -117,12 +117,12 @@ app.get('/pay', function(req, res){
 });
 
 ```
-#### 7.2 Initiate payment with a saved card
+#### 7.2 Initiate payment with a stored card
 
 ##### 7.2.1 Create a payment instructment object
 ```js
 //Creating Instructment of Netbanking
-var savedCard = new ebs.Instrument({
+var storedCard = new ebs.Instrument({
   payment_mode : ebs.CONFIG.PAYMENT_MODE.CREDIT_CARD,
   card_brand   : ebs.CONFIG.CARD_BRAND.VISA,
   name_on_card : 'Test',
@@ -132,12 +132,12 @@ var savedCard = new ebs.Instrument({
 });
 
 ```
-##### 7.2.2 Initiate Payment with signed transaction with saved card
+##### 7.2.2 Initiate Payment with signed transaction with stored card
 ```js
 app.get('/pay', function(req, res){
     ...
     ...
-  const signedTxn = merchant.signTransaction(user, transaction, savedCard)
+  const signedTxn = merchant.signTransaction(user, transaction, storedCard)
   merchant.initiatePayment(signedTxn, function(error, body){
     res.send(body); 
     // body contain form element which loads the EBS portal based on your configuration.
@@ -151,14 +151,14 @@ app.get('/pay', function(req, res){
 
 ##### 7.3.1 Create a payment instructment object
 ```js
-//Creating Instructment of Saved Card
+//Creating Instructment of Stored Card
 var preferedBank = new ebs.Instrument({
-    payment_mode : ebs.CONFIG.PAYMENT_MODE.NET_BANKING,
-    bank_code    : ebs.CONFIG.BANK_CODE.KOTAK_BANK
+    payment_mode   : ebs.CONFIG.PAYMENT_MODE.NET_BANKING,
+    payment_option : 1007 //HDFC PAYMENT OPTION
 });
 
 ```
-##### 7.3.2 Initiate Payment with signed transaction with saved card
+##### 7.3.2 Initiate Payment with signed transaction with stored card
 ```js
 app.get('/pay', function(req, res){
     ...

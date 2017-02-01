@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "ebsjs": "^0.1.6",
     "express": "^4.14.0",
     "pug": "^2.0.0-beta6"
   }

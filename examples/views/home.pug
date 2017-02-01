@@ -5,17 +5,28 @@ block title
 
 block scripts
   style.
+    body { background : #ECF1F7; text-align : center; }
     table, form {
     font-family:Arial, Helvetica, sans-serif;
     font-size:12px;
     }
     th 		 { font-size:12px;background:#015289;color:#FFFFFF;font-weight:bold;height:30px;}
     td 		 { font-size:12px;background:#DDE8F3}
+    .fieldName {width:50%}
     .error {color:#FF0000; font-weight:bold;}
   link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', type='text/css', media='all')
   script(src="http://code.jquery.com/jquery-1.10.0.min.js")
-
+  script.
+    var count =0;
+    function add_fields() {
+      count++;
+      var objTo = document.getElementById('addSplit')
+      var divtest = document.createElement("tr");
+      divtest.innerHTML = '<td>   <input name="ba_bankaccountcode['+count+']" type="text" value=""/> </td> <td align="left">   <input name="split_amount['+count+']" type="text" value=""/></td>';
+      objTo.appendChild(divtest)
+    }
 block content
+  p #{message}
   form#frmTransaction(method='post', action='/', name='frmTransaction')
     h3 Action URL : https://secure.ebs.in/pg/ma/payment/request
     table(width='100%', cellpadding='2', cellspacing='2', border='0')
@@ -24,10 +35,18 @@ block content
       tr
         td.fieldName
           span.error *
-          |  Channel
+          |  Channel Standard=0;Direct=2
         td(align='left')
-          select(name='channel')
-            option(value='0') Standard
+          input(name='channel', type='text', value=0)
+      tr
+        td.fieldName
+          span.error *
+          |  Hash Algo
+        td(align='left')
+          select(name='algo')
+            option(value='md5') MD5
+            option(value='sha1') SHA1
+            option(value='sha512') SHA512
       tr
         td.fieldName(width='50%')
           span.error *
@@ -77,7 +96,7 @@ block content
           span.error *
           |  Return Url
         td(align='left')
-          input(name='return_url', type='text', size='60', value='http://localhost:8000/')
+          input(name='return_url', type='text', size='60', value='http://localhost:8000/response')
       tr
         td.fieldName
           span.error *
@@ -91,7 +110,7 @@ block content
         td(align='left')
           select(name='payment_mode')
             option(value='') All
-            option(value='1') Credit Card
+            option(value='1', selected) Credit Card
             option(value='2') Debit Card
             option(value='3') Net Banking
             option(value='4') Cash Card
@@ -103,7 +122,7 @@ block content
         td(align='left')
           select(name='card_brand')
             option(value='') All
-            option(value='1') VISA
+            option(value='1' selected) VISA
             option(value='2') MasterCard
             option(value='3') Maestro
             option(value='4') Diners Club
@@ -118,6 +137,22 @@ block content
         td(align='left')
           input(name='bank_code', type='text', value='')
       tr
+        td.fieldName Name On Card
+        td(align='left')
+          input(name='name_on_card', type='text', value='Sobin Thomas')
+      tr
+        td.fieldName Card Number
+        td(align='left')
+          input(name='card_number', type='text', value='4111111111111111')
+      tr
+        td.fieldName Card CVV
+        td(align='left')
+          input(name='card_cvv', type='text', value='123')
+      tr
+        td.fieldName Card Expiry
+        td(align='left')
+          input(name='card_expiry', type='text', value='1119')
+      tr
         td.fieldName EMI
         td(align='left')
           input(name='emi', type='text', value='')
@@ -125,6 +160,34 @@ block content
         td.fieldName Page ID
         td(align='left')
           input(name='page_id', type='text', value='')
+    table#addSplit(width='100%', cellpadding='2', cellspacing='2', border='0')
+      tr
+        th(colspan='2') Split Payment Code
+      tr
+        td.fieldName Split Profile Code
+        td(align='left')
+          input(name='split_profile_code', type='text', value='')
+      tr
+        td.fieldName Pay By Date
+        td(align='left')
+          input(name='payby_date', type='text', value='')
+      tr
+        td.fieldName Pay By Time
+        td(align='left')
+          input(name='payby_time', type='text', value='')
+      tr
+        td
+        td(align='left')
+          input(name='add',onclick=' add_fields();', value='Add Bank Code and Split Amount', type='button')
+      tr
+        td Bank Account Code
+        td Amount
+      tr
+        td
+          input(name='ba_bankaccountcode[0]', type='text', value='')
+        td(align='left')
+          input(name='split_amount[0]', type='text', value='')
+    table(width='100%', cellpadding='2', cellspacing='2', border='0')
       tr
         th(colspan='2') Billing Address
       tr
