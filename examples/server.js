@@ -35,8 +35,8 @@ app.post('/', function(req, res){
   }
   // Initialize merchant
   merchant = new ebs.Merchant({
-    key : process.env.EBS_KEY || req.body.key || 'EBS Key',
-    account_id : process.env.EBS_ACCOUNT_ID || req.body.account_id || 'Account Id',
+    key : 'fcfdfb899ccf83461ffffcc7ab8fa3bd',
+    account_id : '5087',
     mode : req.body.mode,
     algo : req.body.algo,
     page_id : req.body.page_id,

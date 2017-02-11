@@ -47,13 +47,13 @@ block content
             option(value='md5') MD5
             option(value='sha1') SHA1
             option(value='sha512') SHA512
-      tr
+      //tr
         td.fieldName(width='50%')
           span.error *
           |  Key
         td(align='left', width='50%')
           input(name='key', type='text', value='EBS_MERCHANT_KEY')
-      tr
+      //tr
         td.fieldName(width='50%')
           span.error *
           |  Account Id
@@ -115,8 +115,8 @@ block content
         td.fieldName Payment Mode
         td(align='left')
           select(name='payment_mode')
-            option(value='') All
-            option(value='1', selected) Credit Card
+            option(value='', selected) All
+            option(value='1') Credit Card
             option(value='2') Debit Card
             option(value='3') Net Banking
             option(value='4') Cash Card
@@ -127,8 +127,8 @@ block content
         td.fieldName Card Brand
         td(align='left')
           select(name='card_brand')
-            option(value='') All
-            option(value='1' selected) VISA
+            option(value='', selected) All
+            option(value='1') VISA
             option(value='2') MasterCard
             option(value='3') Maestro
             option(value='4') Diners Club
